@@ -1,0 +1,11 @@
+---
+- name: Update Existing Packages
+  ansible.builtin.yum:
+    name: '*'
+    state: latest
+    update_cache: true
+
+- name: Install Common Packages
+  ansible.builtin.yum:
+    name: "{{ common_packages }}"
+    state: present

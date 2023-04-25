@@ -1,0 +1,10 @@
+---
+- name: Update Existing Packages
+  community.general.zypper:
+    name: '*'
+    state: latest
+
+- name: Install Common Packages
+  community.general.zypper:
+    name: "{{ common_packages }}"
+    state: present

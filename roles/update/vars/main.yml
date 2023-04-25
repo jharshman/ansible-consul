@@ -1,0 +1,10 @@
+---
+common_packages:
+  - curl
+  - wget
+  - vim
+  - git
+  - jq
+  - bind-utils
+  - unzip
+

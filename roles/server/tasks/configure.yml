@@ -1,0 +1,23 @@
+---
+- name: Copy TLS files to host
+  ansible.builtin.copy:
+    src: files/secrets/{{ item }}
+    dest: /etc/consul/config/tls/
+    owner: root
+    group: root
+    mode: '0644'
+  loop:
+    - ca.pem
+    - ca-key.pem
+    - server-cert.pem
+    - server-cert-key.pem
+
+- name: Copy gossip key to host
+  ansible.builtin.copy:
+    src: files/secrets/gossip.key
+    dest: /etc/consul/config/
+    owner: root
+    group: root
+    mode: '0644'
+
+

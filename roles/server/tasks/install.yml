@@ -1,0 +1,28 @@
+---
+- name: Unzip and Install Consul Server
+  ansible.builtin.unarchive:
+    src: "{{ consul_url }}"
+    dest: /usr/bin/
+    remote_src: yes
+
+- name: Place Unit File
+  ansible.builtin.copy:
+    src: files/consul.service
+    dest: /usr/lib/systemd/system/consul.service
+    owner: root
+    group: root
+    mode: 644
+
+- name: Create Required Directories
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: directory
+  loop:
+    - /etc/consul/config
+    - /etc/consul/config/tls
+    - /etc/consul/data
+
+- name: Reload Systemd
+  ansible.builtin.systemd:
+    daemon_reload: true
+

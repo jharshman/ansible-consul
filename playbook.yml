@@ -1,0 +1,14 @@
+---
+- name: Install and Configure Consul Server
+  hosts: consul-server
+  remote_user: root
+  roles:
+    - update
+    - server
+
+      #- name: Install and Configure Consul Agent
+      #  hosts: consul-agent
+      #  remote_user: root
+      #  roles:
+      #    - update
+      #    - agent

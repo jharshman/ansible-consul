@@ -1,0 +1,6 @@
+---
+- include: opensuse.yml
+  when: ansible_os_family == "Suse"
+- include: redhat.yml
+  when: ansible_os_family == "RedHat"
+
