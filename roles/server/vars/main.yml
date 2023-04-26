@@ -1,2 +1,17 @@
 ---
+# install vars
 consul_url: https://releases.hashicorp.com/consul/1.15.2/consul_1.15.2_linux_amd64.zip
+consul_bin_dir: /usr/bin/
+consul_config_dir: /etc/consul
+consul_config_d_dir: /etc/consul/consul.d
+consul_tls_dir: /etc/consul/tls
+consul_data_dir: /opt/consul
+consul_service_file_dir: /usr/lib/systemd/system
+
+# configure vars
+consul_datacenter: dc1
+consul_tls_files:
+  - ca.pem
+  - ca-key.pem
+  - server-cert.pem
+  - server-cert-key.pem

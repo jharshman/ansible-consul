@@ -2,22 +2,25 @@
 - name: Copy TLS files to host
   ansible.builtin.copy:
     src: files/secrets/{{ item }}
-    dest: /etc/consul/config/tls/
+    dest: "{{ consul_tls_dir }}"
     owner: root
     group: root
     mode: '0644'
-  loop:
-    - ca.pem
-    - ca-key.pem
-    - server-cert.pem
-    - server-cert-key.pem
+  loop: "{{ consul_tls_files }}"
 
 - name: Copy gossip key to host
   ansible.builtin.copy:
     src: files/secrets/gossip.key
-    dest: /etc/consul/config/
+    dest: "{{ consul_config_dir }}"
     owner: root
     group: root
     mode: '0644'
 
+- name: Template consul config
+  ansible.builtin.template:
+    src: templates/consul.hcl.j2
+    dest: "{{ consul_config_d_dir }}/consul.hcl"
+    owner: root
+    group: root
+    mode: '0644'
 

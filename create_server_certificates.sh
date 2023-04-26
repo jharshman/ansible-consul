@@ -41,7 +41,12 @@ main() {
     -domain="$_domain"
 
   # create gossip key
-  $CONSUL_BIN keygen > gossip.key
+  # store in file and as var
+  gossip_key=$(CONSUL_BIN keygen)
+  echo $gossip_key > gossip.key
+  cat << EOM > roles/server/vars/gossip.yml
+gossip_key: $gossip_key
+EOM
 
   # move to roles/server/files/secrets/
   mkdir -p roles/server/files/secrets
@@ -55,6 +60,7 @@ main() {
   randPass=$(pwgen 10 1)
   echo $randPass > password_file.txt
   ansible-vault encrypt --vault-password-file password_file.txt roles/server/files/secrets/*
+  ansible-vault encrypt --vault-password-file password_file.txt roles/server/vars/gossip.yml
 
   # ensure that "password_file" is in .gitignore
   if [[ ! -f .gitignore ]]; then
