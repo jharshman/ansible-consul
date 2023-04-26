@@ -42,10 +42,10 @@ main() {
 
   # create gossip key
   # store in file and as var
-  gossip_key=$(CONSUL_BIN keygen)
+  gossip_key=$($CONSUL_BIN keygen)
   echo $gossip_key > gossip.key
   cat << EOM > roles/server/vars/gossip.yml
-gossip_key: $gossip_key
+consul_gossip_key: $gossip_key
 EOM
 
   # move to roles/server/files/secrets/
