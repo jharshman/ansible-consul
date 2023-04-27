@@ -6,7 +6,11 @@
     owner: root
     group: root
     mode: '0644'
-  loop: "{{ consul_tls_files }}"
+  loop:
+    - "{{ consul_ca }}"
+    - "{{ consul_ca_key }}"
+    - "{{ consul_server_cert }}"
+    - "{{ consul_server_key }}"
 
 - name: Copy gossip key to host
   ansible.builtin.copy:
@@ -16,11 +20,23 @@
     group: root
     mode: '0644'
 
-- name: Template consul config
+- name: Template consul agent config
   ansible.builtin.template:
     src: templates/consul.hcl.j2
     dest: "{{ consul_config_d_dir }}/consul.hcl"
     owner: root
     group: root
     mode: '0644'
+  notify:
+    - restart consul
+
+- name: Template consul server config
+  ansible.builtin.template:
+    src: templates/server.hcl.j2
+    dest: "{{ consul_config_d_dir }}/server.hcl"
+    owner: root
+    group: root
+    mode: '0644'
+  notify:
+    - restart consul
 

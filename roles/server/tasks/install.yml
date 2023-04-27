@@ -5,14 +5,6 @@
     dest: "{{ consul_bin_dir }}"
     remote_src: yes
 
-- name: Place Unit File
-  ansible.builtin.copy:
-    src: files/consul.service
-    dest: "{{ consul_service_file_dir }}/consul.service"
-    owner: root
-    group: root
-    mode: 644
-
 - name: Create Required Directories
   ansible.builtin.file:
     path: "{{ item }}"
@@ -22,7 +14,19 @@
     - "{{ consul_config_d_dir }}"
     - "{{ consul_data_dir }}"
 
-- name: Reload Systemd
+- name: Write Unit File
+  ansible.builtin.copy:
+    src: files/consul.service
+    dest: "{{ consul_service_file_dir }}/consul.service"
+    owner: root
+    group: root
+    mode: 644
+  notify:
+    - daemon reload
+    - restart consul
+
+- name: Enable Unit File
   ansible.builtin.systemd:
-    daemon_reload: true
+    name: consul
+    enabled: true
 

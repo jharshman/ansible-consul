@@ -9,9 +9,10 @@ consul_data_dir: /opt/consul
 consul_service_file_dir: /usr/lib/systemd/system
 
 # configure vars
+domain: harshman.me
 consul_datacenter: dc1
-consul_tls_files:
-  - ca.pem
-  - ca-key.pem
-  - server-cert.pem
-  - server-cert-key.pem
+consul_ca: ca.pem
+consul_ca_key: ca-key.pem
+consul_server_cert: server-cert.pem
+consul_server_key: server-cert-key.pem
+
