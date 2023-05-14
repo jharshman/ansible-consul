@@ -1,4 +1,8 @@
 ---
+- name: Set Hostname
+  ansible.builtin.hostname:
+    name: "{{ hostname }}"
+
 - name: Update Existing Packages
   community.general.zypper:
     name: '*'
