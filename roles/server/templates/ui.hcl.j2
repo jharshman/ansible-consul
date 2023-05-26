@@ -1,3 +1,6 @@
+server = true
+bootstrap_expect=3
+client_addr = "0.0.0.0"
 domain = "{{ domain }}"
 datacenter = "{{ consul_datacenter }}"
 data_dir = "{{ consul_data_dir }}"
@@ -31,10 +34,6 @@ acl {
   tokens {
     initial_management = "{{ consul_init_mgmt_token }}"
   }
-}
-
-ui_config {
-  enabled = true
 }
 
 ports {

@@ -3,12 +3,6 @@
   hosts: consul-server
   remote_user: root
   roles:
-    - update
+    - common
     - server
 
-      #- name: Install and Configure Consul Agent
-      #  hosts: consul-agent
-      #  remote_user: root
-      #  roles:
-      #    - update
-      #    - agent

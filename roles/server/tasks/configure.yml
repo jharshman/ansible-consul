@@ -20,16 +20,6 @@
     group: root
     mode: '0644'
 
-- name: Template consul agent config
-  ansible.builtin.template:
-    src: templates/consul.hcl.j2
-    dest: "{{ consul_config_d_dir }}/consul.hcl"
-    owner: root
-    group: root
-    mode: '0644'
-  notify:
-    - restart consul
-
 - name: Template consul server config
   ansible.builtin.template:
     src: templates/server.hcl.j2
@@ -37,6 +27,17 @@
     owner: root
     group: root
     mode: '0644'
+  notify:
+    - restart consul
+
+- name: Template consul ui config
+  ansible.builtin.template:
+    src: templates/ui.hcl.j2
+    dest: "{{ consul_config_d_dir }}/ui.hcl"
+    owner: root
+    group: root
+    mode: '0644'
+  when: inventory_hostname is "consul01"
   notify:
     - restart consul
 
