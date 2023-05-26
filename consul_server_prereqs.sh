@@ -86,7 +86,7 @@ EOM
   cat <<EOM
 
 -----------------------------------------------------------
-Run the following command to install andn configure Consul.
+Run the following command to install and configure Consul.
 
   ansible-playbook -e @roles/server/vars/generated.yml --vault-password-file password_file.txt -i all.ini playbook.yml
 
