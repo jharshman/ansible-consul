@@ -30,14 +30,3 @@
   notify:
     - restart consul
 
-- name: Template consul ui config
-  ansible.builtin.template:
-    src: templates/ui.hcl.j2
-    dest: "{{ consul_config_d_dir }}/ui.hcl"
-    owner: root
-    group: root
-    mode: '0644'
-  when: inventory_hostname is "consul01"
-  notify:
-    - restart consul
-

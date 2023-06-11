@@ -1,0 +1,10 @@
+- name: Template consul server config
+  ansible.builtin.template:
+    src: templates/server.hcl.j2
+    dest: "{{ consul_config_d_dir }}/server.hcl"
+    owner: root
+    group: root
+    mode: '0644'
+  notify:
+    - restart consul
+

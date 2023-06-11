@@ -6,3 +6,8 @@
     - common
     - server
 
+- name: Activate Consul UI
+  hosts: consul-server-ui
+  remote_user: root
+  roles:
+    - ui
